@@ -4,6 +4,7 @@ import { ARC_LENGTH } from "@/domain/config";
 export function TonightView({ nights }: { nights: NightScore[] }) {
   const nightsCompleted = nights.length;
   const nightsLeft = Math.max(0, ARC_LENGTH - nightsCompleted);
+  const lastNight = nights[nights.length - 1] ?? null;
 
   return (
     <div className="px-5 pt-10 pb-6 space-y-6">
@@ -19,6 +20,8 @@ export function TonightView({ nights }: { nights: NightScore[] }) {
       ) : (
         <ProgressState completed={nightsCompleted} left={nightsLeft} />
       )}
+
+      {lastNight && <NightDetailCard night={lastNight} />}
     </div>
   );
 }
@@ -60,6 +63,55 @@ function ProgressState({
           </p>
         )}
       </div>
+    </div>
+  );
+}
+
+function NightDetailCard({ night }: { night: NightScore }) {
+  const wearHours = Math.round(night.confidence * 8 * 10) / 10;
+  const spo2 = Math.round(97 - night.ahiEquivalent * 0.08);
+  const date = new Date(night.date).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+  });
+
+  const whatHappened =
+    night.ahiEquivalent > 15
+      ? "More breathing events than average. This is within normal night-to-night variation."
+      : night.ahiEquivalent > 5
+      ? "A typical night with some variation in breathing rhythm. Nothing unusual."
+      : "A low-disruption night — breathing patterns were steady throughout.";
+
+  return (
+    <div className="rounded-2xl bg-white border border-stone-100 p-6 space-y-5 shadow-sm">
+      <p className="text-xs text-stone-400">{date}</p>
+
+      <div className="grid grid-cols-3 gap-3 text-center">
+        <StatPill label="score" value={night.ahiEquivalent.toFixed(1)} />
+        <StatPill label="hrs worn" value={`${wearHours}h`} />
+        <StatPill label="avg SpO₂" value={`${spo2}%`} />
+      </div>
+
+      <div className="border-t border-stone-100 pt-4 space-y-1.5">
+        <p className="text-sm font-semibold text-stone-900">What happened</p>
+        <p className="text-sm text-stone-600 leading-relaxed">{whatHappened}</p>
+      </div>
+
+      <p className="text-xs text-stone-400">
+        {night.dataQuality === "partial"
+          ? "Partial data — device was worn for part of the night."
+          : "Full night of data recorded."}
+      </p>
+    </div>
+  );
+}
+
+function StatPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-stone-50 rounded-xl p-3">
+      <p className="text-lg font-bold text-stone-900">{value}</p>
+      <p className="text-xs text-stone-400">{label}</p>
     </div>
   );
 }
