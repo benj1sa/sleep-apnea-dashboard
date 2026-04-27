@@ -19,14 +19,14 @@ export const PERSONAS: Persona[] = [
   {
     id: "mild",
     label: "Mild Risk",
-    description: "Some disruption detected — worth monitoring over time",
+    description: "Some disruption detected. Worth monitoring over time.",
     ahiValues: [6.2, 8.1, 9.0, 7.4, 10.2, 8.5, 9.1, 7.2, 8.4, 9.3, 8.0, 7.8, 8.6, 9.2],
   },
   {
     id: "significant",
     label: "Significant Risk",
-    description: "Elevated breathing events — results recommend clinical review",
-    ahiValues: [20.1, 25.3, 28.4, 22.0, 30.5, 24.2, 26.8, 23.1, 28.7, 25.4, 22.9, 27.3, 25.0, 30.2],
+    description: "Elevated breathing events. Results recommend clinical review.",
+    ahiValues: [30.5, 32.1, 35.8, 31.2, 38.4, 33.7, 36.2, 30.8, 34.5, 37.1, 31.9, 35.3, 33.0, 38.5],
   },
 ];
 
@@ -35,7 +35,8 @@ const CONFIDENCE_VALUES = [
   0.87, 0.93,
 ];
 
-// Fixed anchor date keeps generated dates deterministic across renders
+// Fixed anchor date keeps generated dates deterministic across renders.
+// Night 0 = today; each subsequent night steps one day into the future.
 const ANCHOR_DATE = "2026-04-26";
 
 export function generateNights(persona: PersonaId, count: number): NightScore[] {
@@ -44,7 +45,7 @@ export function generateNights(persona: PersonaId, count: number): NightScore[] 
 
   return Array.from({ length: count }, (_, i) => {
     const date = new Date(anchor);
-    date.setDate(date.getDate() - (count - 1 - i));
+    date.setDate(date.getDate() + i);
 
     return {
       date: date.toISOString().split("T")[0],
@@ -74,7 +75,7 @@ export const NARRATION_STEPS: NarrationStep[] = [
     min: 1,
     max: 2,
     title: "First nights in",
-    body: "Individual data points are arriving. The app encourages keeping the watch on — patterns haven't formed yet.",
+    body: "Your first nights are being recorded. Keep wearing the watch so the app can start spotting patterns.",
   },
   {
     min: 3,
@@ -86,7 +87,7 @@ export const NARRATION_STEPS: NarrationStep[] = [
     min: 6,
     max: 13,
     title: "Building confidence",
-    body: "Halfway through the arc. The rolling average smooths out night-to-night variation and a trend direction — improving, stable, or worsening — appears.",
+    body: "You're halfway through. Night-to-night variation is smoothing out and a clear trend direction is starting to emerge.",
   },
   {
     min: 14,

@@ -29,10 +29,10 @@ const TIER_DEFINITIONS: Record<RiskTierEnum, TierDefinition> = {
   moderate: {
     label: "Moderate patterns",
     impactStatements: [
-      "Consistent breathing disruptions detected. Worth looking into.",
-      "Energy and concentration",
-      "Cardiovascular health over time",
-      "Driving alertness",
+      "Consistent breathing disruptions detected across your nights.",
+      "Your energy and ability to concentrate during the day may be affected.",
+      "Ongoing disruptions like these can affect heart health over time.",
+      "Alertness while driving or operating machinery may be reduced.",
     ],
     ctaType: "telehealth",
   },
@@ -41,7 +41,7 @@ const TIER_DEFINITIONS: Record<RiskTierEnum, TierDefinition> = {
     impactStatements: [
       "Frequent breathing disruptions detected. A doctor should review this.",
       "This level of breathing disruption is associated with fatigue, heart strain, and reduced oxygen.",
-      "Effective treatments exist — this is manageable.",
+      "Effective treatments exist. This is manageable.",
     ],
     ctaType: "urgent",
   },

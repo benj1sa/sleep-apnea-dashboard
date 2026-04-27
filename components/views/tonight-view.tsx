@@ -59,7 +59,7 @@ function ProgressState({
           </p>
         ) : (
           <p className="text-sm text-stone-600 font-medium">
-            14 nights complete — your results are ready.
+            14 nights complete. Your results are ready.
           </p>
         )}
       </div>
@@ -81,7 +81,7 @@ function NightDetailCard({ night }: { night: NightScore }) {
       ? "More breathing events than average. This is within normal night-to-night variation."
       : night.ahiEquivalent > 5
       ? "A typical night with some variation in breathing rhythm. Nothing unusual."
-      : "A low-disruption night — breathing patterns were steady throughout.";
+      : "A low-disruption night. Breathing patterns were steady throughout.";
 
   return (
     <div className="rounded-2xl bg-white border border-stone-100 p-6 space-y-5 shadow-sm">
@@ -100,7 +100,7 @@ function NightDetailCard({ night }: { night: NightScore }) {
 
       <p className="text-xs text-stone-400">
         {night.dataQuality === "partial"
-          ? "Partial data — device was worn for part of the night."
+          ? "Partial data. Device was worn for part of the night."
           : "Full night of data recorded."}
       </p>
     </div>

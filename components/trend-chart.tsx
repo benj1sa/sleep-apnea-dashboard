@@ -65,7 +65,7 @@ function NightDetailSheet({ night, onDismiss }: NightDetailSheetProps) {
               ? "More breathing events than average. This is within normal night-to-night variation."
               : night.ahiEquivalent > 5
               ? "A typical night with some variation in breathing rhythm. Nothing unusual."
-              : "A low-disruption night — breathing patterns were steady throughout."}
+              : "A low-disruption night. Breathing patterns were steady throughout."}
           </p>
         </div>
 
@@ -75,7 +75,7 @@ function NightDetailSheet({ night, onDismiss }: NightDetailSheetProps) {
           </p>
           <p className="text-xs text-stone-400">
             {night.dataQuality === "partial"
-              ? "Partial data — device was worn for part of the night."
+              ? "Partial data. Device was worn for part of the night."
               : "Full night of data recorded."}
           </p>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TonightView } from "@/components/views/tonight-view";
 import { TrendView } from "@/components/views/trend-view";
 import { ResultsView } from "@/components/views/results-view";
@@ -24,6 +24,23 @@ export default function DemoPage() {
   const [persona, setPersona] = useState<PersonaId>("mild");
   const [nightsCompleted, setNightsCompleted] = useState(7);
   const [activeTab, setActiveTab] = useState<Tab>("tonight");
+  const [isCycling, setIsCycling] = useState(false);
+
+  useEffect(() => {
+    if (!isCycling) return;
+    if (nightsCompleted >= ARC_LENGTH) {
+      setActiveTab("results");
+      const t = setTimeout(() => {
+        setNightsCompleted(0);
+        setActiveTab("tonight");
+      }, 3000);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      setNightsCompleted((n) => n + 1);
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [isCycling, nightsCompleted]);
 
   const nights = generateNights(persona, nightsCompleted);
   const narration = getNarration(nightsCompleted);
@@ -66,10 +83,32 @@ export default function DemoPage() {
           <div className="p-4 space-y-3">
             <div className="flex items-center justify-between">
               <p className="text-xs text-stone-400 font-medium">Nights</p>
-              <span className="text-sm font-bold text-stone-900 tabular-nums">
-                {nightsCompleted}
-                <span className="font-normal text-stone-400"> / {ARC_LENGTH}</span>
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-stone-900 tabular-nums">
+                  {nightsCompleted}
+                  <span className="font-normal text-stone-400"> / {ARC_LENGTH}</span>
+                </span>
+                <button
+                  onClick={() => setIsCycling((c) => !c)}
+                  title={isCycling ? "Pause auto-cycle" : "Start auto-cycle"}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                    isCycling
+                      ? "bg-stone-900 text-white"
+                      : "bg-stone-100 text-stone-500 hover:bg-stone-200"
+                  }`}
+                >
+                  {isCycling ? (
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="currentColor">
+                      <rect x="0" y="0" width="2.5" height="9" rx="1" />
+                      <rect x="5.5" y="0" width="2.5" height="9" rx="1" />
+                    </svg>
+                  ) : (
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="currentColor">
+                      <path d="M1 0.5L8 4.5L1 8.5V0.5Z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
             <input
               type="range"
@@ -77,7 +116,8 @@ export default function DemoPage() {
               max={ARC_LENGTH}
               value={nightsCompleted}
               onChange={(e) => setNightsCompleted(Number(e.target.value))}
-              className="w-full accent-stone-900 cursor-pointer"
+              disabled={isCycling}
+              className={`w-full accent-stone-900 ${isCycling ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}`}
             />
             <div className="flex justify-between text-xs text-stone-300">
               <span>0</span>
@@ -165,7 +205,7 @@ export default function DemoPage() {
         </div>
 
         <p className="text-xs text-stone-400">
-          Interactive demo — no account required
+          Interactive demo. No account required.
         </p>
       </div>
     </div>
