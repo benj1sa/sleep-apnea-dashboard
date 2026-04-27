@@ -1,0 +1,75 @@
+.page {
+  min-height: 100dvh;
+  background: #f2ede4;
+  color: #1c1917;
+  font-family: var(--font-instrument), 'Instrument Sans', sans-serif;
+  position: relative;
+}
+
+.bgWord {
+  position: fixed;
+  bottom: -4vw;
+  right: -2vw;
+  font-family: var(--font-fraunces), serif;
+  font-size: 22vw;
+  font-weight: 300;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(28, 25, 23, 0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+}
+
+.header {
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.logoMark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logoDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a6fd9;
+  animation: breathe 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+.logoText {
+  font-family: var(--font-instrument), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1c1917;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+}
+
+.nightsNum {
+  font-family: var(--font-fraunces), serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #1c1917;
+  letter-spacing: -0.01em;
+}

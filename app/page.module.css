@@ -1,0 +1,225 @@
+.page {
+  min-height: 100dvh;
+  background: #f2ede4;
+  color: #1c1917;
+  font-family: var(--font-instrument), 'Instrument Sans', sans-serif;
+  position: relative;
+}
+
+.bgWord {
+  position: fixed;
+  bottom: -4vw;
+  right: -2vw;
+  font-family: var(--font-fraunces), serif;
+  font-size: 22vw;
+  font-weight: 300;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(28, 25, 23, 0.05);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoMark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logoDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a6fd9;
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+.logoText {
+  font-family: var(--font-instrument), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1c1917;
+}
+
+.statusPill {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: #cdd8f5;
+  color: #3a6fd9;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* Hero */
+.hero {
+  padding: 7rem 0 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 4rem;
+}
+
+.heroLeft {}
+
+.preLabel {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a847c;
+  margin-bottom: 1.75rem;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.05s;
+}
+
+.h1 {
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: #1c1917;
+  margin-bottom: 0;
+  animation: fadeUp 0.7s ease both;
+  animation-delay: 0.15s;
+}
+
+.h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: #3a6fd9;
+}
+
+.heroRight {
+  padding-bottom: 0.5rem;
+}
+
+.bodyCopy {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #8a847c;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.3s;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  background: #1c1917;
+  color: #f2ede4;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  transition: transform 0.2s ease, background 0.2s ease;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.4s;
+}
+
+.cta:hover {
+  background: #3a6fd9;
+  transform: translateY(-2px);
+}
+
+.cta svg {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.cta:hover svg {
+  transform: translateX(3px);
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(28, 25, 23, 0.1);
+}
+
+/* Stats strip */
+.statsStrip {
+  padding: 3rem 0;
+  display: flex;
+  gap: 0;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.55s;
+}
+
+.stat {
+  flex: 1;
+  padding-right: 3rem;
+  border-right: 1px solid rgba(28, 25, 23, 0.1);
+  margin-right: 3rem;
+}
+
+.stat:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.statNum {
+  font-family: var(--font-fraunces), serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: #1c1917;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a847c;
+}
+
+/* Footer */
+.footer {
+  padding: 2rem 0;
+  border-top: 1px solid rgba(28, 25, 23, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: #8a847c;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
