@@ -68,13 +68,13 @@ export const NARRATION_STEPS: NarrationStep[] = [
     min: 0,
     max: 0,
     title: "Day one",
-    body: "The athlete has just connected their watch. The app is ready and waiting for the first night of sleep data to come in.",
+    body: "The watch is connected. The app is ready and waiting for the first night of sleep data to come in.",
   },
   {
     min: 1,
     max: 2,
     title: "First nights in",
-    body: "Individual data points are arriving. The app encourages the athlete to keep wearing the watch — patterns haven't formed yet.",
+    body: "Individual data points are arriving. The app encourages keeping the watch on — patterns haven't formed yet.",
   },
   {
     min: 3,
@@ -92,7 +92,7 @@ export const NARRATION_STEPS: NarrationStep[] = [
     min: 14,
     max: 14,
     title: "Arc complete",
-    body: "14 nights of data unlock the full risk assessment. The athlete's sleep tier, impact statements, and personalised next steps are revealed.",
+    body: "14 nights of data unlock the full risk assessment. A sleep tier, impact statements, and personalised next steps are revealed.",
   },
 ];
 

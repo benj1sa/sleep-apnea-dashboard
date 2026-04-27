@@ -35,7 +35,7 @@ export default function DemoPage() {
         <div className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
           {/* Persona */}
           <div className="p-4 space-y-2.5">
-            <p className="text-xs text-stone-400 font-medium">Athlete</p>
+            <p className="text-xs text-stone-400 font-medium">User</p>
             <div className="space-y-1.5">
               {PERSONAS.map((p) => (
                 <button
