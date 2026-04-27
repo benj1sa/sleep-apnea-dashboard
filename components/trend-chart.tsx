@@ -32,7 +32,7 @@ function NightDetailSheet({ night, onDismiss }: NightDetailSheetProps) {
   const spo2 = Math.round(97 - night.ahiEquivalent * 0.08);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end" onClick={onDismiss}>
+    <div className="absolute inset-0 z-50 flex items-end" onClick={onDismiss}>
       <div
         className="w-full max-w-md mx-auto bg-white rounded-t-3xl shadow-2xl p-6 space-y-5 pb-10"
         onClick={(e) => e.stopPropagation()}
