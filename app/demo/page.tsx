@@ -11,13 +11,14 @@ import {
 } from "@/domain/demo-data";
 import type { PersonaId } from "@/domain/demo-data";
 import { ARC_LENGTH } from "@/domain/config";
+import { Moon, TrendingUp, CheckCircle } from "lucide-react";
 
 type Tab = "tonight" | "trend" | "results";
 
-const TABS: { id: Tab; label: string }[] = [
-  { id: "tonight", label: "Tonight" },
-  { id: "trend", label: "Trend" },
-  { id: "results", label: "Results" },
+const TABS: { id: Tab; label: string; Icon: React.ElementType }[] = [
+  { id: "tonight", label: "Tonight", Icon: Moon },
+  { id: "trend", label: "Trend", Icon: TrendingUp },
+  { id: "results", label: "Results", Icon: CheckCircle },
 ];
 
 export default function DemoPage() {
@@ -131,17 +132,17 @@ export default function DemoPage() {
           <div className="p-4 space-y-2.5">
             <p className="text-xs text-stone-400 font-medium">Screen</p>
             <div className="flex gap-1.5">
-              {TABS.map((tab) => (
+              {TABS.map(({ id, label }) => (
                 <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  key={id}
+                  onClick={() => setActiveTab(id)}
                   className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                    activeTab === tab.id
+                    activeTab === id
                       ? "bg-stone-900 text-white"
                       : "text-stone-500 hover:bg-stone-50"
                   }`}
                 >
-                  {tab.label}
+                  {label}
                 </button>
               ))}
             </div>
@@ -184,17 +185,18 @@ export default function DemoPage() {
           {/* Bottom nav */}
           <div className="absolute bottom-0 left-0 right-0 border-t border-stone-200 bg-white/95 backdrop-blur-sm">
             <div className="flex items-center justify-around py-3">
-              {TABS.map((tab) => (
+              {TABS.map(({ id, label, Icon }) => (
                 <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  key={id}
+                  onClick={() => setActiveTab(id)}
                   className={`flex flex-col items-center gap-0.5 text-xs font-medium transition-colors px-4 py-1 ${
-                    activeTab === tab.id
+                    activeTab === id
                       ? "text-stone-900"
                       : "text-stone-400 hover:text-stone-700"
                   }`}
                 >
-                  {tab.label}
+                  <Icon size={18} />
+                  {label}
                 </button>
               ))}
             </div>
