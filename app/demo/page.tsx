@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { TonightView } from "@/components/views/tonight-view";
 import { TrendView } from "@/components/views/trend-view";
 import { ResultsView } from "@/components/views/results-view";
+import { ModelResultsPanel } from "@/components/demo/model-results-panel";
 import {
   PERSONAS,
   generateNights,
@@ -12,7 +13,7 @@ import {
 } from "@/domain/demo-data";
 import type { PersonaId } from "@/domain/demo-data";
 import { ARC_LENGTH } from "@/domain/config";
-import { Moon, TrendingUp, CheckCircle } from "lucide-react";
+import { Moon, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import styles from "./demo.module.css";
 
 type Tab = "tonight" | "trend" | "results";
@@ -22,6 +23,10 @@ const TABS: { id: Tab; label: string; Icon: React.ElementType }[] = [
   { id: "trend", label: "Trend", Icon: TrendingUp },
   { id: "results", label: "Results", Icon: CheckCircle },
 ];
+
+const SECTION_TITLE_CLASS = "text-[1.05rem] font-semibold tracking-tight text-[#1c1917]";
+const SECTION_SUBTITLE_CLASS = "mt-1 text-[0.78rem] text-[#8a847c]";
+const SECTION_FOOTNOTE_CLASS = "text-[0.72rem] tracking-[0.06em] text-[#8a847c]";
 
 export default function DemoPage() {
   const [persona, setPersona] = useState<PersonaId>("mild");
@@ -61,7 +66,7 @@ export default function DemoPage() {
 
       <div className={`${styles.main} flex items-start justify-center gap-8 p-10 pt-10`}>
         {/* ── Sidebar ── */}
-        <aside className="w-56 flex-shrink-0 sticky top-10">
+        <aside className="order-2 w-56 flex-shrink-0 sticky top-10 mt-16">
           <div className="bg-white rounded-2xl border border-[rgba(28,25,23,0.12)] shadow-sm overflow-hidden">
             {/* Persona */}
             <div className="p-4 space-y-2.5">
@@ -178,46 +183,69 @@ export default function DemoPage() {
           </a> */}
         </aside>
 
-        {/* ── App preview ── */}
-        <div className="flex-shrink-0 flex flex-col items-center gap-3">
-          <div
-            className="relative bg-[#F5F3EF] rounded-[32px] shadow-xl overflow-hidden flex flex-col"
-            style={{ width: 375, height: 760 }}
-          >
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden pb-20">
-              {activeTab === "tonight" && <TonightView nights={nights} />}
-              {activeTab === "trend" && <TrendView nights={nights} />}
-              {activeTab === "results" && <ResultsView nights={nights} />}
+        <div className="order-1 flex items-start gap-8">
+          {/* ── Desktop model results panel ── */}
+          <section className="hidden lg:flex flex-col gap-3">
+            <div>
+              <h2 className={SECTION_TITLE_CLASS}>Model Outputs</h2>
+              <p className={SECTION_SUBTITLE_CLASS}>Per-participant predictions and tier-call narratives</p>
             </div>
+            <ModelResultsPanel />
+          </section>
 
-            {/* Bottom nav */}
-            <div className="absolute bottom-0 left-0 right-0 border-t border-stone-200 bg-white/95 backdrop-blur-sm">
-              <div className="flex items-center justify-around py-3">
-                {TABS.map(({ id, label, Icon }) => (
-                  <button
-                    key={id}
-                    onClick={() => setActiveTab(id)}
-                    className={`flex flex-col items-center gap-0.5 text-xs font-medium transition-colors px-4 py-1 ${
-                      activeTab === id
-                        ? "text-[#1c1917]"
-                        : "text-stone-400 hover:text-stone-700"
-                    }`}
-                  >
-                    <Icon size={18} />
-                    {label}
-                  </button>
-                ))}
-              </div>
-              <div className="flex justify-center pb-2">
-                <div className="w-28 h-1 bg-[#1c1917] rounded-full opacity-20" />
-              </div>
+          <div className="hidden lg:flex self-stretch items-center justify-center px-1">
+            <div className="flex flex-col items-center gap-2 text-stone-400">
+              <div className="h-12 w-px bg-stone-300/70" />
+              <ArrowRight size={18} />
+              <div className="h-12 w-px bg-stone-300/70" />
             </div>
           </div>
 
-          <p style={{ fontSize: '0.72rem', letterSpacing: '0.06em', color: '#8a847c' }}>
-            Interactive demo · No account required
-          </p>
+          {/* ── App preview ── */}
+          <section className="flex-shrink-0 flex flex-col items-start gap-3">
+            <div className="w-full">
+              <h2 className={SECTION_TITLE_CLASS}>Application Demo</h2>
+              <p className={SECTION_SUBTITLE_CLASS}>Interactive app preview and navigation flow</p>
+            </div>
+            <div
+              className="relative self-center bg-[#F5F3EF] rounded-[32px] shadow-xl overflow-hidden flex flex-col"
+              style={{ width: 375, height: 760 }}
+            >
+              {/* Scrollable content */}
+              <div className="flex-1 overflow-y-auto overflow-x-hidden pb-20">
+                {activeTab === "tonight" && <TonightView nights={nights} />}
+                {activeTab === "trend" && <TrendView nights={nights} />}
+                {activeTab === "results" && <ResultsView nights={nights} />}
+              </div>
+
+              {/* Bottom nav */}
+              <div className="absolute bottom-0 left-0 right-0 border-t border-stone-200 bg-white/95 backdrop-blur-sm">
+                <div className="flex items-center justify-around py-3">
+                  {TABS.map(({ id, label, Icon }) => (
+                    <button
+                      key={id}
+                      onClick={() => setActiveTab(id)}
+                      className={`flex flex-col items-center gap-0.5 text-xs font-medium transition-colors px-4 py-1 ${
+                        activeTab === id
+                          ? "text-[#1c1917]"
+                          : "text-stone-400 hover:text-stone-700"
+                      }`}
+                    >
+                      <Icon size={18} />
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex justify-center pb-2">
+                  <div className="w-28 h-1 bg-[#1c1917] rounded-full opacity-20" />
+                </div>
+              </div>
+            </div>
+
+            <p className={`${SECTION_FOOTNOTE_CLASS} self-center`}>
+              Interactive demo · No account required
+            </p>
+          </section>
         </div>
       </div>
     </div>

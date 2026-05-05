@@ -29,3 +29,8 @@ export interface RiskTier {
   impactStatements: string[];
   ctaType: CtaType;
 }
+
+export interface ModelResult {
+    patient_id: string;
+    model_name: string;
+}
