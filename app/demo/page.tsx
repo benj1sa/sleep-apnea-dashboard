@@ -44,8 +44,11 @@ export default function DemoPage() {
       }, 3000);
       return () => clearTimeout(t);
     }
+
+    setActiveTab(nightsCompleted > 4 ? "trend" : "tonight");
+
     const t = setTimeout(() => {
-      setNightsCompleted((n) => n + 1);
+      setNightsCompleted((n) => Math.min(n + 1, ARC_LENGTH));
     }, 1500);
     return () => clearTimeout(t);
   }, [isCycling, nightsCompleted]);
