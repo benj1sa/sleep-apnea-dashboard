@@ -188,7 +188,7 @@ export default function DemoPage() {
           <section className="hidden lg:flex flex-col gap-3">
             <div>
               <h2 className={SECTION_TITLE_CLASS}>Model Outputs</h2>
-              <p className={SECTION_SUBTITLE_CLASS}>Per-participant predictions and tier-call narratives</p>
+              <p className={SECTION_SUBTITLE_CLASS}>Traditional ML + PyTorch predictions and tier-call narratives</p>
             </div>
             <ModelResultsPanel />
           </section>

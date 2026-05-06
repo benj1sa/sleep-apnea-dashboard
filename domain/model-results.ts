@@ -5,9 +5,12 @@ const AHI_TIER_THRESHOLDS = {
 } as const;
 
 const MODEL_LABEL_OVERRIDES: Record<string, string> = {
-  rf_100w_pca_3: "Random Forest",
-  knn_3_pca_3: "KNN",
-  svm_rbf_univariate_5: "SVM",
+  rf_100w_pca_3: "Traditional ML - Random Forest",
+  knn_3_pca_3: "Traditional ML - KNN",
+  svm_rbf_univariate_5: "Traditional ML - SVM",
+  best_apnea_cnn: "PyTorch - CNN",
+  best_apnea_rnn: "PyTorch - RNN",
+  best_apnea_lstm: "PyTorch - LSTM",
 };
 
 type TierLabel = "Normal" | "Mild" | "Moderate" | "Severe";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import rawTraditionalResults from "@/domain/traditional_ml_results.json";
+import rawCombinedResults from "@/domain/model_results_combined.json";
 import {
   buildModelResultsDataset,
   downsampleSegments,
@@ -64,7 +64,7 @@ function SegmentRow({ label, sequence }: { label: "True" | "Pred"; sequence: str
 }
 
 export function ModelResultsPanel() {
-  const dataset = useMemo(() => buildModelResultsDataset(rawTraditionalResults), []);
+  const dataset = useMemo(() => buildModelResultsDataset(rawCombinedResults), []);
   const [activeModelId, setActiveModelId] = useState<string>(dataset.models[0]?.modelId ?? "");
 
   const activeModel =
